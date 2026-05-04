@@ -1,12 +1,3 @@
-/** EL2008 Praktikum Pemecahan Masalah dengan Pemrograman 2024/2025
- *   Modul               : 4
- *   Hari dan Tanggal    : Senin, 4 Mei 2026
- *   Nama (NIM)          : Najwa Ghaysani Athaya A (13224023)
- *   Nama File           : soal2.c
- *   Deskripsi           : program menerima dua input lalu tiap inputnya disorting, selanjutnya kedua input linked list itu dimerged lalu disorting lagi menjadi satu linked list terurut.
- * 
- */
-
 #include<stdio.h>
 #include <stdlib.h>
 
@@ -99,7 +90,6 @@ int main(){
             temp2 = temp2->next;
         }
     }
-    struct node *head1 =  temp1;
 
     struct node *temp12, *temp22, *t2, *newNode2, *startList2;
     int n2, k2, i2, j2;
@@ -129,17 +119,15 @@ int main(){
         for (j2 = 0; j2 <= i2; j2++) {
             if (temp12->data > temp22->data) {
                 // Swapping data if the current node has a greater value than the next node
-                k = temp1->data;
+                k2 = temp1->data;
                 temp12->data = temp22->data;
-                temp22->data = k;
+                temp22->data = k2;
             }
             temp12 = temp22;
             temp22 = temp22->next;
         }
     }
-    struct node *head2 =  temp12;
-    
-    struct node *res = sortedMerge(head1, head2);
+    struct node *res = sortedMerge(startList1, startList2);
     printList(res);
     return 0;
 }
