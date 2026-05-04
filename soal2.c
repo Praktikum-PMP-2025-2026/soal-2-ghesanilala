@@ -1,3 +1,11 @@
+/** EL2008 Praktikum Pemecahan Masalah dengan Pemrograman 2024/2025
+ *   Modul               : 4
+ *   Hari dan Tanggal    : SENIN, 4 MEI 2026
+ *   Nama (NIM)          : NAJWA GHAYSANI ATHAYA A (13224023)
+ *   Nama File           : soal2.c
+ *   Deskripsi           : ada input dari user 2 linked list unsorted, nanti masing2 di sorted dulu baru kemudian di merge lalu disorted lagi.
+ * 
+ */
 #include<stdio.h>
 #include <stdlib.h>
 
