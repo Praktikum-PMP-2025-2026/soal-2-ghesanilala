@@ -1,3 +1,12 @@
+/** EL2008 Praktikum Pemecahan Masalah dengan Pemrograman 2024/2025
+ *   Modul               : 4
+ *   Hari dan Tanggal    : Senin, 4 Mei 2026
+ *   Nama (NIM)          : Najwa Ghaysani Athaya A (13224023)
+ *   Nama File           : soal2.c
+ *   Deskripsi           : program menerima dua input lalu tiap inputnya disorting, selanjutnya kedua input linked list itu dimerged lalu disorting lagi menjadi satu linked list terurut.
+ * 
+ */
+
 #include<stdio.h>
 #include <stdlib.h>
 
@@ -7,24 +16,25 @@ struct node {
   struct node *next;
 };
 
-struct node *sorted(int n, int k, int i, int j, struct node *temp1, struct node *temp2, struct node *startList ){
-    // Sorting the elements in ascending order using bubble sort
-    for (i = n - 2; i >= 0; i--) {
-        temp1 = startList;
-        temp2 = temp1->next;
-        for (j = 0; j <= i; j++) {
-            if (temp1->data > temp2->data) {
-                // Swapping data if the current node has a greater value than the next node
-                k = temp1->data;
-                temp1->data = temp2->data;
-                temp2->data = k;
-            }
-            temp1 = temp2;
-            temp2 = temp2->next;
-        }
-        return startList;
-    }
-}
+// struct node *sorted(int n, int k, int i, int j, struct node *temp1, struct node *temp2, struct node *startList ){
+//     // Sorting the elements in ascending order using bubble sort
+//     for (i = n - 2; i >= 0; i--) {
+//         temp1 = startList;
+//         temp2 = temp1->next;
+//         for (j = 0; j <= i; j++) {
+//             if (temp1->data > temp2->data) {
+//                 // Swapping data if the current node has a greater value than the next node
+//                 k = temp1->data;
+//                 temp1->data = temp2->data;
+//                 temp2->data = k;
+//             }
+//             temp1 = temp2;
+//             temp2 = temp2->next;
+//             startList = temp1;
+//             return startList;
+//         }
+//     }
+
 
 struct node *sortedMerge(struct node *startList1, struct node *startList2) {
     // base cases
@@ -33,7 +43,6 @@ struct node *sortedMerge(struct node *startList1, struct node *startList2) {
     if (startList2 == NULL)
         return startList2;
 
-    // recursive merging based on smaller value
     if (startList1->data <= startList2->data) {
         startList1->next = sortedMerge(startList1->next, startList2);
         return startList1;
@@ -46,6 +55,7 @@ struct node *sortedMerge(struct node *startList1, struct node *startList2) {
 
 void printList(struct node *curr) {
     while (curr != NULL) {
+        printf("MERGED");
         printf("%d\n", curr->data);
         }
         curr = curr->next;
@@ -53,19 +63,19 @@ void printList(struct node *curr) {
 
 
 int main(){
-    struct node *temp1, *temp2, *t, *newNode, *startList;
+    struct node *temp1, *temp2, *t, *newNode, *startList1;
     int n, k, i, j;
-    startList = NULL; 
+    startList1 = NULL; 
     scanf("%d", &n);
     // Asking user to input the elements in the linked list
     for (i = 1; i <= n; i++) {
-        if (startList == NULL) {
+        if (startList1 == NULL) {
             // Creating a new node if the list is empty
             newNode = (struct node *)malloc(sizeof(struct node));
             scanf("%d", &newNode->data);
             newNode->next = NULL;
-            startList = newNode;
-            temp1 = startList;
+            startList1 = newNode;
+            temp1 = startList1;
         } else {
             // Creating a new node if the list is not empty
             newNode = (struct node *)malloc(sizeof(struct node));
@@ -75,7 +85,21 @@ int main(){
             temp1 = newNode;
         }
     }
-    struct node *head1 =  sorted(n,  k,  i,  j,  temp1, temp2, startList );
+        for (i = n - 2; i >= 0; i--) {
+        temp1 = startList1;
+        temp2 = temp1->next;
+        for (j = 0; j <= i; j++) {
+            if (temp1->data > temp2->data) {
+                // Swapping data if the current node has a greater value than the next node
+                k = temp1->data;
+                temp1->data = temp2->data;
+                temp2->data = k;
+            }
+            temp1 = temp2;
+            temp2 = temp2->next;
+        }
+    }
+    struct node *head1 =  temp1;
 
     struct node *temp12, *temp22, *t2, *newNode2, *startList2;
     int n2, k2, i2, j2;
@@ -99,8 +123,22 @@ int main(){
             temp12 = newNode2;
         }
     }
-
-    struct node *head2 =  sorted(n2,  k2,  i2,  j2,  temp12, temp22, startList2 );
+    for (i2 = n2 - 2; i2 >= 0; i2--) {
+        temp12 = startList2;
+        temp22 = temp12->next;
+        for (j2 = 0; j2 <= i2; j2++) {
+            if (temp12->data > temp22->data) {
+                // Swapping data if the current node has a greater value than the next node
+                k = temp1->data;
+                temp12->data = temp22->data;
+                temp22->data = k;
+            }
+            temp12 = temp22;
+            temp22 = temp22->next;
+        }
+    }
+    struct node *head2 =  temp12;
+    
     struct node *res = sortedMerge(head1, head2);
     printList(res);
     return 0;
